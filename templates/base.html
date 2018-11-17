@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/journal/bulmaswatch.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Poiret+One" rel="stylesheet">
+
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body style="font-family: 'Poiret One', cursive;">
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                {% if not request.user.is_authenticated %}
+                <a class="navbar-item" href="{% url 'home' %}" style="font-family: 'Alfa Slab One', cursive; font-size: 32px">
+                    Django Real Estates
+                </a>
+                {% else %}
+                <a class="navbar-item" href="" style="font-family: 'Alfa Slab One', cursive; font-size: 32px">
+                    Dashboard
+                </a>
+                {% endif %}
+            
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            
+            <div class="navbar-menu">
+                {% if request.user.is_authenticated %}
+                <div class="navbar-start">
+                    <a href="" class="navbar-item">Profile</a>
+                    <a href="" class="navbar-item">My units</a>
+                    <a href="" class="navbar-item">Houses</a>
+                </div>
+                {% endif %}
+                <div class="navbar-end">
+                    {% if not request.user.is_authenticated %}
+                        <a href="{% url 'login' %}" class="navbar-item">Login</a>
+                        <a href="{% url 'register' %}" class="navbar-item">Register</a>
+                    {% else %}
+                        <a href="{% url 'home' %}" class="navbar-item">Website</a>
+                        <a href="{% url 'logout' %}" class="navbar-item">Logout</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+
+            <!-- Navigation tabs for website visitors -->
+            {% if not request.user.is_authenticated %}
+            <div class="tabs">
+                <ul>
+                    <li><a href="{% url 'home' %}"> Home</a></li>
+                    <li><a href="">Houses</a></li>
+                    <li><a href="">Apartments</a></li>
+                    <li><a href="{% url 'about' %}">Blog</a></li>
+                
+                </ul>
+            </div>
+            {% endif %}
+
+            <!-- VERIFICATION REMINDER FOR AGENT -->
+            {% if not request.user.agent.verified and request.user.is_authenticated %}
+            <div class="notification is-primary has-text-white">
+                Your account has not been verified yet. Please verify by oploading a document <a href="">here</a>
+            </div>
+            {% endif %}
+            
+            <!-- Main Content  -->
+            {% block content %}{% endblock content %}
+        
+        </div>
+    </section>
+</body>
+</html>
