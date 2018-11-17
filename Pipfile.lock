@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7fd325263ac3ea65df412f7283710aaa7133215dd86567e408075b8dbee88d0c"
+            "sha256": "4a3cb69700e6867f20973cafc7d8f2f767ea380f47c72cf78aa702900963d619"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -37,6 +37,14 @@
             ],
             "index": "pypi",
             "version": "==0.5.3.0"
+        },
+        "django-money": {
+            "hashes": [
+                "sha256:20a45bbe6a1aa1f595fdb546e1b22d5339dcfdf626ad9a202e768899d403b205",
+                "sha256:a62216c7cf06371b86a630cd99c5ae74b4ef897bfc970b1b57f1795b11a90b51"
+            ],
+            "index": "pypi",
+            "version": "==0.14.3"
         },
         "django-phonenumber-field": {
             "hashes": [
@@ -88,6 +96,13 @@
             ],
             "index": "pypi",
             "version": "==5.3.0"
+        },
+        "py-moneyed": {
+            "hashes": [
+                "sha256:0c5dc04f77f1e0a123df051cc6ddc79267a48c612cb2d3dcfe7eb88cfc395bf9",
+                "sha256:f8c04183fd65d307a4b59f4a68332d3b9418d668b2a36cedd531f9cd1eb98933"
+            ],
+            "version": "==0.7.0"
         },
         "pytz": {
             "hashes": [

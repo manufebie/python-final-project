@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Bulma CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/journal/bulmaswatch.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/materia/bulmaswatch.min.css">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Poiret+One" rel="stylesheet">
@@ -40,7 +40,7 @@
                 <div class="navbar-start">
                     <a href="" class="navbar-item">Profile</a>
                     <a href="" class="navbar-item">My units</a>
-                    <a href="" class="navbar-item">Houses</a>
+                    <a href="{% url 'account:house_list' %}" class="navbar-item">My houses</a>
                 </div>
                 {% endif %}
                 <div class="navbar-end">
@@ -64,9 +64,10 @@
             <div class="tabs">
                 <ul>
                     <li><a href="{% url 'home' %}"> Home</a></li>
-                    <li><a href="">Houses</a></li>
+                    <li><a href="{% url 'properties:house_list' %}">Houses</a></li>
                     <li><a href="">Apartments</a></li>
-                    <li><a href="{% url 'about' %}">Blog</a></li>
+                    <li><a href="">Blog</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
                 
                 </ul>
             </div>
@@ -74,7 +75,7 @@
 
             <!-- VERIFICATION REMINDER FOR AGENT -->
             {% if not request.user.agent.verified and request.user.is_authenticated %}
-            <div class="notification is-primary has-text-white">
+            <div class="notification is-danger has-text-white">
                 Your account has not been verified yet. Please verify by oploading a document <a href="">here</a>
             </div>
             {% endif %}

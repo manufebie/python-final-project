@@ -12,6 +12,7 @@ pillow = "*"
 django-phonenumber-field = "*"
 phonenumbers = "*"
 django-bulma = "*"
+django-money = "*"
 
 [requires]
 python_version = "3.6"

@@ -32,11 +32,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3rd party apps
     'bulma',
+    'djmoney',
     'phonenumber_field',
     # project apps
     'accounts',
     'core_app.apps.CoreAppConfig',
-    'pages'
+    'pages',
+    'properties',
 ]
 
 MIDDLEWARE = [

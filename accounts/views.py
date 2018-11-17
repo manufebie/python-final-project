@@ -30,7 +30,7 @@ class AgentProfileCreateView(LoginRequiredMixin, CreateView):
     model = Agent
     form_class = AgentProfileForm
     template_name = 'registration/registration_success.html'
-    success_url = reverse_lazy('account:profile')
+    success_url = reverse_lazy('account:dashboard_home')
 
     def form_valid(self, form):
         # assign user to requested user

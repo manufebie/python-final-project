@@ -3,6 +3,10 @@ from django.db import models
 
 from phonenumber_field.modelfields import PhoneNumberField
 
+def user_directory_path(instance, file):
+    # images will be saved to user seperated folders
+    # EXAMPLE: MEDIA_ROOT/properties/owner_1/unit.png
+    return 'logos/owner_{}/{}'.format(instance.owner.id, file)
 
 class Agent(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='agent', on_delete=models.CASCADE,
@@ -14,7 +18,7 @@ class Agent(models.Model):
     about = models.TextField()
     phonenumber = PhoneNumberField(blank=True)
     line_id = models.CharField(max_length=25, unique=True, blank=True)
-    #logo = models.ImageField(upload_to=, default='agents/logos/default.png')
+    logo = models.ImageField(upload_to=user_directory_path, default='logos/default.jpeg')
     #document = models.FileField(upload_to=,)
     verified = models.BooleanField(default=False)
 
