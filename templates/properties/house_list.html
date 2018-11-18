@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    Houses
-{% endblock title %}
+{% block title %}Houses{% endblock title %}
 
 {% block content %}
-    <h1 class="title">Our houses in Jakarta</h1>
-    <p>Lorem ipsum dolor sit amet, vidit laboramus has no, graeci facilis albucius ad mei, cum veritus pertinacia ut. Id quo vide assum evertitur, sumo clita efficiendi vim ea. Verear feugiat ullamcorper sit no. Vix malis deleniti luptatum ut, magna percipit inciderint cu nam. Et sale vitae virtute quo. Sed eu constituto sadipscing, vim dolorem nominavi detraxit ea.
-    Ea mel salutandi cotidieque, liber ignota alterum et sed. Eos tritani prodesset id. Vocent lucilius consetetur eu eum, tractatos salutatus gubergren eum eu. Sea ei denique scriptorem, cum et discere partiendo voluptatum. Diam reprimique signiferumque ex qu</p>
-    <br>
+    <div class="box">
+        <h1 class="title">Our houses in Jakarta</h1>
+        <p>Lorem ipsum dolor sit amet, vidit laboramus has no, graeci facilis albucius ad mei, cum veritus pertinacia ut. Id quo vide assum evertitur, sumo clita efficiendi vim ea. Verear feugiat ullamcorper sit no. Vix malis deleniti luptatum ut, magna percipit inciderint cu nam. Et sale vitae virtute quo. Sed eu constituto sadipscing, vim dolorem nominavi detraxit ea.
+        Ea mel salutandi cotidieque, liber ignota alterum et sed. Eos tritani prodesset id. Vocent lucilius consetetur eu eum, tractatos salutatus gubergren eum eu. Sea ei denique scriptorem, cum et discere partiendo voluptatum. Diam reprimique signiferumque ex qu</p>
+    </div>
+
     <div class="columns is-multiline is-4">
         {% for object in house_list %}
         <div class="column is-3">
@@ -31,8 +31,11 @@
                             </figure>
                         </div>
                         <div class="media-content">
-                            <h5 class="title is-5">{{ object.owner.agent.name }}</h5>
-                            
+                            <p>
+                                <strong>{{ object.owner.agent.name }}</strong>
+                                <br>
+                                <small>added on {{ object.timestamp|date:'d M Y'}}</small>
+                            </p>
                         </div>
                     </div>
                     <div class="content">

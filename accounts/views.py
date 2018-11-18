@@ -2,11 +2,11 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from core_app.models import CustomUser
 from .forms import AgentRegistrationForm, AgentProfileForm
-from .models import Agent
+from .models import Agent, VerificicationDocument
 
 
 class AgentRegistrationView(CreateView):
@@ -36,6 +36,21 @@ class AgentProfileCreateView(LoginRequiredMixin, CreateView):
         # assign user to requested user
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+
+class AgentSubmitDocumentView(LoginRequiredMixin, CreateView):
+    model = VerificicationDocument
+    fields = ['name', 'document']
+    template_name = 'accounts/document_submit_form.html'
+
+    def form_valid(self, form):
+        # assign user to requested user
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class DocumentListView(LoginRequiredMixin, ListView):
+    pass
 
 
 class AgentProfileView(LoginRequiredMixin, DetailView):

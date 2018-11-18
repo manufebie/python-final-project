@@ -1,31 +1,70 @@
 {% extends 'base.html' %}
 
-{% block title %}
-{% endblock title %}
+{% block title %}{{ request.user.agent.name }}{% endblock title %}
+
+{% block tabs %}
+{% endblock tabs %}
 
 {% block content %}
+    {% include 'snippets/verification_message.html' %}
+
+    {% include 'snippets/agent_tabs.html' %}
+
     <div class="columns">
         {% include 'snippets/side_panel.html' %}
         <div class="column">
-            <h1 class="title">My properties</h1>
-            <div class="columns">
-                {% for object in house_list  %}
-                    <div class="column is-2">
-                        <div class="card-header">
-                            <div class="card-header-title">
-                                <small>{{ object.title }}</small>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-5by3">
+            
+            <div class="box">
+                <h1 class="subtitle">Properties Overview</h1>
+            </div>
+
+            {% if not house_list %}
+            <div class="box">
+                <h1 class="subtitle">Message</h1>
+                <p>You have not added any Properties yet. </p>
+            </div>
+            {% endif %}
+
+            <div class="columns is-multiline">
+                {% for object in house_list %}
+                <div class="column is-12">
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-128x128">
                                     <a href="{{ object.get_absolute_url }}">
                                         <img src="{{ object.image.url }}" alt="">
                                     </a>
                                 </figure>
                             </div>
-                        </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <small><strong>added {{ object.timestamp|timesince }} ago - {{object.timestamp }}</strong></small>
+                                        <br>
+                                        <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+                                    </p>
+                                </div>
+                                <!-- OBJECT ACTIONS -->
+                                <nav class="level is-mobile">
+                                    <div class="level-left">
+                                        <a href="{% url 'account:update_house' object.slug %}" class="level-item"> <!--EDIT-->
+                                            <span class="icon is-small">
+                                                <i class="fas fa-edit"></i>
+                                            </span>
+                                        </a>
+                                        <a href="{% url 'account:delete_house' object.slug %}" class="level-item">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </nav>
+                                <!-- END OBJECT ACTIONS -->
+                            </div>
+                        </article>
                     </div>
+                </div>
                 {% endfor %}
             </div>
         </div>

@@ -2,14 +2,7 @@
 
 {% load bulma_tags %}
 
-{% block title %}
-    Add new house
-{% endblock title %}
-
-{% block navbar_brand %}
-
-{% endblock navbar_brand %}
-
+{% block title %}Submit document{% endblock title %}
 
 {% block tabs %}
 {% endblock tabs %}
@@ -18,18 +11,20 @@
     {% include 'snippets/verification_message.html' %}
 
     {% include 'snippets/agent_tabs.html' %}
-    
-    <div class="columns is-8">
+    <div class="columns">
         {% include 'snippets/side_panel.html' %}
+
         <div class="column">
-           <div class="box">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <h1 class="subtitle">Add new house</h1>
+            <div class="box">
+                <h1 class="subtitle">Submit document</h1>
+                <p>By submitting a document we can verify you are a legitimate company. Your status as being verified or not can be seen by everyone, so being verified will give people interrested in your property more trust in you.</p>
+                <br>
+                <form action="" method="post">
                     {% csrf_token %}
                     {{ form|bulma }}
                     <input type="submit" class="button is-primary is-outlined" value="Submit">
                 </form>
-           </div>
+            </div>
         </div>
     </div>
 {% endblock content %}

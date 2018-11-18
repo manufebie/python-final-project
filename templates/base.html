@@ -8,25 +8,23 @@
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/materia/bulmaswatch.min.css">
 
+    <!-- Fontawesome CDN -->
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One|Poiret+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=VT323|Share+Tech+Mono" rel="stylesheet">
 
     <title>{% block title %}{% endblock title %}</title>
 </head>
-<body style="font-family: 'Poiret One', cursive;">
+<body style="font-family: 'Share Tech Mono', monospace;">
     <!-- Navbar -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
-                {% if not request.user.is_authenticated %}
-                <a class="navbar-item" href="{% url 'home' %}" style="font-family: 'Alfa Slab One', cursive; font-size: 32px">
-                    Django Real Estates
-                </a>
-                {% else %}
-                <a class="navbar-item" href="" style="font-family: 'Alfa Slab One', cursive; font-size: 32px">
-                    Dashboard
-                </a>
-                {% endif %}
+
+                {% block navbar_brand %}
+                    {% include 'snippets/navbar_brand.html' %}
+                {% endblock navbar_brand %}
             
                 <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
                     <span aria-hidden="true"></span>
@@ -36,20 +34,18 @@
             </div>
             
             <div class="navbar-menu">
-                {% if request.user.is_authenticated %}
-                <div class="navbar-start">
-                    <a href="" class="navbar-item">Profile</a>
-                    <a href="" class="navbar-item">My units</a>
-                    <a href="{% url 'account:house_list' %}" class="navbar-item">My houses</a>
-                </div>
-                {% endif %}
                 <div class="navbar-end">
+                    <!-- Links based on authentication or not -->
                     {% if not request.user.is_authenticated %}
                         <a href="{% url 'login' %}" class="navbar-item">Login</a>
                         <a href="{% url 'register' %}" class="navbar-item">Register</a>
                     {% else %}
-                        <a href="{% url 'home' %}" class="navbar-item">Website</a>
-                        <a href="{% url 'logout' %}" class="navbar-item">Logout</a>
+                        <a href="{% url 'home' %}" class="navbar-item">
+                            <span class="icon"><i class="fas fa-home"></i></span>
+                        </a>
+                        <a href="{% url 'logout' %}" class="navbar-item">
+                            <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                        </a>
                     {% endif %}
                 </div>
             </div>
@@ -59,26 +55,19 @@
     <section class="section">
         <div class="container">
 
-            <!-- Navigation tabs for website visitors -->
-            {% if not request.user.is_authenticated %}
-            <div class="tabs">
-                <ul>
-                    <li><a href="{% url 'home' %}"> Home</a></li>
-                    <li><a href="{% url 'properties:house_list' %}">Houses</a></li>
-                    <li><a href="">Apartments</a></li>
-                    <li><a href="">Blog</a></li>
-                    <li><a href="{% url 'about' %}">About</a></li>
-                
-                </ul>
-            </div>
+            <!-- MESSAGES -->
+            {% if messages %}
+                {% for message in messages  %}
+                <div class="notification is-success has-text-white">
+                    {{ message }}
+                </div>    
+                {% endfor %}
             {% endif %}
 
-            <!-- VERIFICATION REMINDER FOR AGENT -->
-            {% if not request.user.agent.verified and request.user.is_authenticated %}
-            <div class="notification is-danger has-text-white">
-                Your account has not been verified yet. Please verify by oploading a document <a href="">here</a>
-            </div>
-            {% endif %}
+            <!-- Navigation tabs -->
+            {% block tabs %}
+                {% include 'snippets/tabs.html' %}
+            {% endblock tabs %}
             
             <!-- Main Content  -->
             {% block content %}{% endblock content %}
