@@ -1,6 +1,21 @@
-from django.views.generic import ListView, DetailView
+'''
+The views here are for the website visitors that are looking for properties.
+'''
+from .base import *
 
-from ..models import House
+from ..models import Apartment, ApartmentUnit, House
+
+
+class ApartmentList(ListView):
+    model = Apartment
+
+
+class ApartmentDetailView(DetailView):
+    model = Apartment
+
+
+class ApartmentUnitDetailView(DetailView):
+    model = ApartmentUnit
 
 
 class HouseListView(ListView):
@@ -10,3 +25,6 @@ class HouseListView(ListView):
 
 class HouseDetailView(DetailView):
     model = House
+
+
+

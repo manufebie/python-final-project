@@ -84,6 +84,44 @@ class House(AbstractPropertyBase):
 
     def get_absolute_url(self):
         return reverse('properties:house_detail', kwargs={"slug": self.slug})
+
+
+class Apartment(models.Model):
+
+    '''Class representing an Apartment'''
+    name = models.CharField(max_length=125, unique=True)
+    slug = models.SlugField(unique=True)
+    description = models.TextField(max_length=255)
+    # location = .....
+    floors = models.IntegerField()
+    shopping_mall = models.BooleanField(default=False)
+    gym = models.BooleanField(default=False)
+    swimming_pool = models.BooleanField(default=False)
+    jogging_track = models.BooleanField(default=False)
+    laundry = models.BooleanField(default=False)
+    security = models.BooleanField(default=False)
+    image = models.ImageField(upload_to='properties/apartments', default='properties/default.jpg')
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('properties:apartment_detail', kwargs={'slug': self.slug})
+
+
+class ApartmentUnit(AbstractPropertyBase):
+    apartment = models.ForeignKey(Apartment, related_name='units', on_delete=models.CASCADE)
+    floor = models.IntegerField(default=3)
+    balcony = models.BooleanField(default=False)
+
+    def get_absolute_url(self):
+        return reverse('properties:unit_detail', kwargs={'slug': self.slug})
+    
+
+    
+
+
     
     
 

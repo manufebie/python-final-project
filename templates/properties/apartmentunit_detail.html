@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.title }}{% endblock title %}
+
+{% block content %}
+    <div class="box">
+        <div class="columns">
+            <div class="column is-8">
+                <figure class="image">
+                    <a href="{{ object.image.url }}">
+                        <img src="{{ object.image.url }}" alt="{{ object.title }}">
+                    </a>
+                </figure>
+            </div>
+            <div class="column">
+                <h1 class="title">{{ object.title }}</h1>
+                <small>added on {{ object.timestamp|date:'d M Y' }}</small>
+                <br><br>
+                {{ object.description|safe|linebreaks }}
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <h1 class="title">Costs</h1>
+
+    </div>
+{% endblock content %}
