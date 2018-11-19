@@ -9,7 +9,6 @@ from .managers import CustomUserManager
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, null=True)
     is_agent = models.BooleanField(default=False)
-
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,

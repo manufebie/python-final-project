@@ -1,35 +1,22 @@
-{% extends 'base.html' %}
+{% extends 'dashboard.html' %}
 
 {% block title %}Delete {{ object.title }}{% endblock title %}
 
-{% block tabs %}
-{% endblock tabs %}
-
-{% block content %}
-    {% include 'snippets/verification_message.html' %}
-
-    {% include 'snippets/agent_tabs.html' %}
-    
-    <div class="columns">
-        {% include 'snippets/side_panel.html' %}
-
-        <div class="column">
-            <div class="box">
-                <div class="columns">
-                    <div class="column">
-                        <figure class="image">
-                            <img src="{{ object.image.url }}" alt="">
-                        </figure>
-                    </div>
-                    <div class="column">
-                        <form action="" method="post">
-                            {% csrf_token %}
-                            <h1 class="subtitle">Confirm you want to delete "{{object.title }}"</h1>
-                            <input type="submit" class="button is-success is-outlined" value="Confirm">
-                        </form>
-                    </div>
-                </div>
+{% block box %}
+    <div class="box">
+        <div class="columns">
+            <div class="column">
+                <figure class="image">
+                    <img src="{{ object.image.url }}" alt="">
+                </figure>
+            </div>
+            <div class="column">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <h1 class="subtitle">Confirm you want to delete "{{object.title }}"</h1>
+                    <input type="submit" class="button is-success is-outlined" value="Confirm">
+                </form>
             </div>
         </div>
     </div>
-{% endblock content %}
+{% endblock box %}

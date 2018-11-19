@@ -30,33 +30,58 @@ class AgentProfileCreateView(LoginRequiredMixin, CreateView):
     model = Agent
     form_class = AgentProfileForm
     template_name = 'registration/registration_success.html'
-    success_url = reverse_lazy('account:dashboard_home')
+    success_url = reverse_lazy('account:house_list')
 
     def form_valid(self, form):
         # assign user to requested user
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+
+class AgentLisView(ListView):
+    '''A view that returns all the agents'''
+    model = Agent
 
 
 class AgentSubmitDocumentView(LoginRequiredMixin, CreateView):
     model = VerificicationDocument
     fields = ['name', 'document']
     template_name = 'accounts/document_submit_form.html'
+    success_url = reverse_lazy('account:house_list')
 
     def form_valid(self, form):
         # assign user to requested user
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        return super().form_valid(form) 
 
 
-class DocumentListView(LoginRequiredMixin, ListView):
-    pass
+class MyDocumentListView(LoginRequiredMixin, ListView):
+    model = VerificicationDocument
+    context_object_name = 'document_list'
+    template_name = 'accounts/document_list.html'
 
 
-class AgentProfileView(LoginRequiredMixin, DetailView):
-    model = Agent
-    template_name = 'accounts/agent_profile.html'
+'''Function views'''
+
+def confirm_verification(request, slug):
+    '''Confirm verification by change boolean value to True'''
+    agent = Agent.objects.get(slug=slug)
+    agent.verified = True
+    agent.save()
+    # redirect after confirmation
+    return redirect('account:document_list')
+
+def verify_agent(request, slug):
+    '''View to be called on in uploaded document list to verify an agent''' 
+    object = Agent.objects.get(slug=slug)
+    context = {
+        'object':object,
+    }
+    return render(request, 'accounts/verify_agent.html', context)
+    
+
+    
 
 
-def agent_dashboard(request):
-    return render(request, 'accounts/dashboard_home.html', {})    
+
+   

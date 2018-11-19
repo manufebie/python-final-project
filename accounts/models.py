@@ -5,10 +5,8 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 def user_directory_path(instance, file):
     # file will be saved to user seperated folders
-    if instance.logo:
-        return 'logos/agent_{}/{}'.format(instance.user.id, file)
-    elif instance.document:
-        return 'documents/agent_{}/{}'.format(instance.user.id, file)
+    return 'logos/agent_{}/{}'.format(instance.user.id, file)
+
 
 class Agent(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='agent', on_delete=models.CASCADE,
@@ -27,11 +25,26 @@ class Agent(models.Model):
         return self.name
 
 
+class ContentManager(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+    primary_key=True)
+    first_name = models.CharField(max_length=125)
+    last_name = models.CharField(max_length=125)
+    bio = models.TextField(max_length=255)
+    avatar = models.ImageField(upload_to=user_directory_path, default=settings.DEFAULT_AVATAR)
+
+    def __str__(self):
+        return '{} {}'.format(self.first_name, self.last_name)
+
+
 class VerificicationDocument(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name='document', on_delete=models.CASCADE)
     name = models.CharField(max_length=55)
-    document = models.FileField(upload_to=user_directory_path)
+    document = models.FileField(upload_to='documents')
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['timestamp']
 
     def __str__(self):
         return self.name

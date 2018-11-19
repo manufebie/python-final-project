@@ -1,30 +1,19 @@
-{% extends 'base.html' %}
+{% extends 'dashboard.html' %}
 
 {% load bulma_tags %}
 
 {% block title %}Submit document{% endblock title %}
 
-{% block tabs %}
-{% endblock tabs %}
-
-{% block content %}
-    {% include 'snippets/verification_message.html' %}
-
-    {% include 'snippets/agent_tabs.html' %}
-    <div class="columns">
-        {% include 'snippets/side_panel.html' %}
-
-        <div class="column">
-            <div class="box">
-                <h1 class="subtitle">Submit document</h1>
-                <p>By submitting a document we can verify you are a legitimate company. Your status as being verified or not can be seen by everyone, so being verified will give people interrested in your property more trust in you.</p>
-                <br>
-                <form action="" method="post">
-                    {% csrf_token %}
-                    {{ form|bulma }}
-                    <input type="submit" class="button is-primary is-outlined" value="Submit">
-                </form>
-            </div>
+{% block box %}
+    <div class="box">
+        <h1 class="title">Submit document(s)</h1>
+        <p>Verify your account by submitting the required documents.</p>
+        <br>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|bulma }}
+            <input type="submit" class="button is-primary is-outlined" value="Submit">
+        </form>
         </div>
     </div>
-{% endblock content %}
+{% endblock box %}

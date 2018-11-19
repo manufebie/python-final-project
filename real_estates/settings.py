@@ -4,6 +4,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES_DIRS = os.path.join(BASE_DIR, 'templates')
 
+# Default avatar from avatars.adorable.io
+DEFAULT_AVATAR = 'https://api.adorable.io/avatars/285/abott@adorable.png'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -18,7 +20,7 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'core_app.CustomUser'
 
-LOGIN_REDIRECT_URL = 'account:dashboard_home'
+LOGIN_REDIRECT_URL = 'account:house_list'
 LOGOUT_REDIRECT_URL = 'login'
 
 # Application definition
@@ -36,6 +38,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     # project apps
     'accounts',
+    'blog',
     'core_app.apps.CoreAppConfig',
     'pages',
     'properties',
@@ -64,6 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                #'properties.context_processors.apartment_count',
+                #'properties.context_processors.house_count',
             ],
         },
     },

@@ -1,6 +1,0 @@
-<!-- VERIFICATION REMINDER FOR AGENT -->
-{% if not request.user.agent.verified and request.user.is_authenticated %}
-<div class="notification is-danger has-text-white">
-    Your account has not been verified yet. Please verify by oploading a document <a href="{% url 'account:submit_document' %}">here</a>
-</div>
-{% endif %}

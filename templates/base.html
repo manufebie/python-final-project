@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- Bulma CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/materia/bulmaswatch.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/sandstone/bulmaswatch.min.css">
 
     <!-- Fontawesome CDN -->
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
@@ -21,18 +21,10 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
-
-                {% block navbar_brand %}
-                    {% include 'snippets/navbar_brand.html' %}
-                {% endblock navbar_brand %}
-            
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
+                <a class="navbar-item" href="{% url 'home' %}" style="font-family: 'VT323', monospace; font-size: 32px">  
+                    Django Real Estates
                 </a>
             </div>
-            
             <div class="navbar-menu">
                 <div class="navbar-end">
                     <!-- Links based on authentication or not -->
@@ -40,14 +32,9 @@
                         <a href="{% url 'login' %}" class="navbar-item">Login</a>
                         <a href="{% url 'register' %}" class="navbar-item">Register</a>
                     {% else %}
-                        <a href="" class="navbar-item">
+                        <a href="{% url 'account:house_list' %}" class="navbar-item">
                             <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
-                        </a>
-                        <a href="{% url 'home' %}" class="navbar-item">
-                            <span class="icon"><i class="fas fa-home"></i></span>
-                        </a>
-                        <a href="{% url 'logout' %}" class="navbar-item">
-                            <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                            <span>Dashboard</span> 
                         </a>
                     {% endif %}
                 </div>
@@ -59,18 +46,18 @@
         <div class="container">
 
             <!-- MESSAGES -->
-            {% if messages %}
-                {% for message in messages  %}
-                <div class="notification is-success has-text-white">
-                    {{ message }}
-                </div>    
-                {% endfor %}
-            {% endif %}
+            {% include 'snippets/messages.html' %}
 
             <!-- Navigation tabs -->
-            {% block tabs %}
-                {% include 'snippets/tabs.html' %}
-            {% endblock tabs %}
+            <div class="tabs">
+                <ul>
+                    <li><a href="{% url 'home' %}"> Home</a></li>
+                    <li><a href="{% url 'properties:house_list' %}">Houses</a></li>
+                    <li><a href="{% url 'properties:apartment_list' %}">Apartments</a></li>
+                    <li><a href="{% url 'blog:article_list' %}">Blog</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                </ul>
+            </div>
             
             <!-- Main Content  -->
             {% block content %}{% endblock content %}
@@ -78,8 +65,23 @@
         </div>
     </section>
 
-    {% block footer %}
-      {% include 'snippets/footer.html' %}
-    {% endblock footer %}
+    <footer class="footer">
+        <div class="container">
+            <div class="content">
+                <div class="columns">
+                    <div class="column is-4">
+                        <h1 class="subtitle is-6">Jobs</h1>
+                        
+                    </div>
+                    <div class="column is-4">
+                        <h1 class="subtitle is-6">Property agents</h1>
+                        <p><a href="{% url 'login' %}">Login</a></p>
+                        <p><a href="{% url 'register' %}">Register</a></p>
+                        <p><a href="{% url 'agent_list' %}">Our agents</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

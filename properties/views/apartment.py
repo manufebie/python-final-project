@@ -4,7 +4,13 @@ The views allows the agent to do CRUD operations on the aparmentunit object
 '''
 from .base import *
 
-from ..models import Apartment, ApartmentUnit
+from ..models import Apartment, ApartmentUnit, House 
+
+
+
+class MyApartmentListView(ListView):
+    model = Apartment
+    template_name = 'properties/my_apartment_list.html'
 
 
 class ApartmentCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -17,6 +23,9 @@ class ApartmentCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class MyApartmentUnitListView(LoginRequiredMixin, ListView):
     model = ApartmentUnit
     template_name = 'properties/my_apartment_unit.html'
+
+    def get_queryset(self):
+        return ApartmentUnit.objects.filter(owner=self.request.user)
 
 
 class ApartmentUnitCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -34,9 +43,10 @@ class ApartmentUnitCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateVie
 class ApartmentUnitUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = ApartmentUnit
     fields = ['apartment', 'title', 'slug', 'deposit', 'rent_per_month', 'description',
-        'furnishing', 'bedrooms', 'bathrooms', 'floors', 'size', 'water_heating', 'available', 
+        'furnishing', 'bedrooms', 'size', 'water_heating', 'available', 
         'floor', 'balcony','image', 'available']
     success_message = '%(title)s successfully updated'
+    template_name = 'properties/apartmentunit_update.html'
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
