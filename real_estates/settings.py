@@ -68,7 +68,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 # custom context processors
-                'blog.context_processors.latest_articles',
                 'blog.context_processors.articles_count',
                 'properties.context_processors.apartment_count',
                 #'properties.context_processors.apartmentunit_count',

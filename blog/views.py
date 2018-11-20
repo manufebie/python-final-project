@@ -12,6 +12,11 @@ class ArticleListView(ListView):
     model = Article
 
 
+class ArticleDetailView(DetailView):
+    # retrieve single article object
+    model = Article
+
+
 class MyArticleListView(LoginRequiredMixin, ListView):
     # Retrieve list of article objects owned by user
     model = Article
@@ -22,34 +27,32 @@ class MyArticleListView(LoginRequiredMixin, ListView):
         return Article.objects.filter(user=self.request.user)
 
 
-class ArticleDetailView(DetailView):
-    # retrieve single article object
-    model = Article
-
-
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     # create article object
     model = Article
     fields = ['title', 'subtitle', 'slug', 'body', 'image']
+    success_message = '%(title)s successfully posted'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
 
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     # update existing article object
     model = Article
     fields = ['title', 'subtitle', 'image']
+    success_message = '%(title)s has been updated'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
 
-class ArticleDeleteView(DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     # delete article object
     model = Article
+    success_message = 'Article has been deleted!'
     success_url = reverse_lazy('account:article_list')
-    #success_url = reverse_lazy('')
+    
 

@@ -1,3 +1,8 @@
+'''
+All the URL configs here are for the CMS redirects. These paths are only accessable for
+authenticated users.
+'''
+
 from django.urls import path
 from django.views.generic import TemplateView
 
@@ -5,8 +10,8 @@ from .views import AgentSubmitDocumentView, MyDocumentListView, verify_agent, co
 from blog.views import ArticleCreateView, ArticleDeleteView, ArticleUpdateView, MyArticleListView
 from properties.views.house import (HouseCreateView, MyHouseListView, HouseUpdateView,
                                     HouseDeleteView)
-from properties.views.apartment import (ApartmentCreateView, ApartmentUnitCreateView, ApartmentUnitDeleteView, ApartmentUnitUpdateView,
-                                        MyApartmentListView, MyApartmentUnitListView, ApartmentUnitDeleteView)
+from properties.views.apartment import (ApartmentCreateView, ApartmentUpdateView, ApartmentDeleteView, ApartmentUnitCreateView, ApartmentUnitDeleteView, 
+                                        ApartmentUnitUpdateView, MyApartmentListView, MyApartmentUnitListView, ApartmentUnitDeleteView)
 
 app_name = 'account'
 
@@ -16,6 +21,8 @@ urlpatterns = [
     # apartments
     path('apartments/', MyApartmentListView.as_view(), name='apartment_list'),
     path('apartments/create/', ApartmentCreateView.as_view(), name='create_apartment'),
+    path('apartments/<slug:slug>/update/', ApartmentUpdateView.as_view(), name='update_apartment'),
+    path('apartments/<slug:slug>/delete/', ApartmentDeleteView.as_view(), name='delete_apartment'),
     # house 
     path('houses/', MyHouseListView.as_view(), name='house_list'),
     path('houses/add-house/', HouseCreateView.as_view(), name='create_house'),
@@ -36,5 +43,6 @@ urlpatterns = [
     
     path('articles/', MyArticleListView.as_view(), name='article_list'),
     path('articles/write-article/', ArticleCreateView.as_view(), name='write_article'),
-    # path('articles/<slug:slug>/delete/', ArticleDeleteView.as_view(), name='article_delete'),
+    path('articles/<slug:slug>/update/', ArticleUpdateView.as_view(), name='update_article'),
+    path('articles/<slug:slug>/delete/', ArticleDeleteView.as_view(), name='delete_article'),
 ]

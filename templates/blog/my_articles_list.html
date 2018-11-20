@@ -1,3 +1,4 @@
+<!-- LIST OF ARTICLES FOR THE CONTENT MANAGER -->
 {% extends 'dashboard.html' %}
 
 {% block title %}My articles{% endblock title %}
@@ -22,10 +23,10 @@
                     <nav class="level is-mobile">
                         <div class="level-left">
                             <!-- UPDate -->
-                            <a href="" class="level-item">
+                            <a href="{% url 'account:update_article' object.slug %}" class="level-item">
                                 <span class="icon"><i class="fas fa-edit"></i></span>
                             </a>
-                            <a href="" class="level-item">
+                            <a href="{% url 'account:delete_article' object.slug %}" class="level-item">
                                 <span class="icon"><i class="fas fa-trash-alt"></i></span>
                             </a>
                         </div>

@@ -160,28 +160,7 @@
                 <!-- Dashboard overview -->
                 <div class="column">
                     {% if request.user.is_agent %}
-                    <div class="box">
-                        <nav class="level">
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <p class="heading">Apartment Units</p>
-                                    <p class="title">{}</p>
-                                </div>
-                            </div>
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <p class="heading">Houses</p>
-                                    <p class="title">{}</p>
-                                </div>
-                            </div>
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <p class="heading">Total Properties</p>
-                                    <p class="title">{}</p>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
+                    
                     {% else %}
                     <div class="box">
                         <nav class="level">

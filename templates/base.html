@@ -12,11 +12,11 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=VT323|Share+Tech+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300" rel="stylesheet">
 
     <title>{% block title %}{% endblock title %}</title>
 </head>
-<body style="font-family: 'Share Tech Mono', monospace;">
+<body style="font-family: 'Source Sans Pro', sans-serif;">
     <!-- Navbar -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
@@ -49,6 +49,7 @@
             {% include 'snippets/messages.html' %}
 
             <!-- Small tag message -->
+            {% if request.user.is_authenticated %}
             <div class="field is-grouped is-grouped-multiline">
                 <div class="control">
                     <div class="tags has-addons">
@@ -57,6 +58,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
 
             <!-- Navigation tabs -->
             <div class="tabs">

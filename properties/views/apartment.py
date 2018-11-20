@@ -7,17 +7,41 @@ from .base import *
 from ..models import Apartment, ApartmentUnit, House 
 
 
-
 class MyApartmentListView(ListView):
+    '''A list view for website visitors'''
     model = Apartment
     template_name = 'properties/my_apartment_list.html'
 
 
 class ApartmentCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    '''Create Apartment view for content managers'''
     model = Apartment
     fields = ['name', 'slug', 'description', 'floors', 'shopping_mall',
         'gym', 'swimming_pool', 'jogging_track', 'laundry', 'security', 'image']
     success_message = 'Apartment %(name)s successfully added'
+
+
+class ApartmentUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    '''Update apartment for content managers'''
+    model = Apartment
+    fields = ['name', 'slug', 'description', 'floors', 'shopping_mall',
+        'gym', 'swimming_pool', 'jogging_track', 'laundry', 'security', 'image']
+    success_message = '%(name)s has been successfully updated'
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
+
+class ApartmentDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = Apartment
+    success_url = reverse_lazy('account:apartment_list')
+    success_message = 'Apartment has been deleted'
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(ApartmentDeleteView, self).delete(request, *args, **kwargs)
+
 
 
 class MyApartmentUnitListView(LoginRequiredMixin, ListView):
