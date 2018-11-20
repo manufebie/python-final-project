@@ -20,7 +20,7 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'core_app.CustomUser'
 
-LOGIN_REDIRECT_URL = 'account:house_list'
+LOGIN_REDIRECT_URL = 'account:dashboard'
 LOGOUT_REDIRECT_URL = 'login'
 
 # Application definition
@@ -67,8 +67,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #'properties.context_processors.apartment_count',
-                #'properties.context_processors.house_count',
+                # custom context processors
+                'blog.context_processors.latest_articles',
+                'blog.context_processors.articles_count',
+                'properties.context_processors.apartment_count',
+                #'properties.context_processors.apartmentunit_count',
             ],
         },
     },

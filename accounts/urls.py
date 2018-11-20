@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import TemplateView
 
 from .views import AgentSubmitDocumentView, MyDocumentListView, verify_agent, confirm_verification
 from blog.views import ArticleCreateView, ArticleDeleteView, ArticleUpdateView, MyArticleListView
@@ -10,6 +11,8 @@ from properties.views.apartment import (ApartmentCreateView, ApartmentUnitCreate
 app_name = 'account'
 
 urlpatterns = [
+    path('', TemplateView.as_view(template_name='overview.html'), name='dashboard'),
+
     # apartments
     path('apartments/', MyApartmentListView.as_view(), name='apartment_list'),
     path('apartments/create/', ApartmentCreateView.as_view(), name='create_apartment'),

@@ -32,7 +32,7 @@
                         <a href="{% url 'login' %}" class="navbar-item">Login</a>
                         <a href="{% url 'register' %}" class="navbar-item">Register</a>
                     {% else %}
-                        <a href="{% url 'account:house_list' %}" class="navbar-item">
+                        <a href="{% url 'account:dashboard' %}" class="navbar-item">
                             <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
                             <span>Dashboard</span> 
                         </a>
@@ -47,6 +47,16 @@
 
             <!-- MESSAGES -->
             {% include 'snippets/messages.html' %}
+
+            <!-- Small tag message -->
+            <div class="field is-grouped is-grouped-multiline">
+                <div class="control">
+                    <div class="tags has-addons">
+                        <span class="tag is-dark is-medium icon"><i class="far fa-user-circle"></i></span>
+                        <span class="tag is-info is-medium"><a href="{% url 'account:dashboard' %}" class="has-text-white">{{ request.user }}</a></span>
+                    </div>
+                </div>
+            </div>
 
             <!-- Navigation tabs -->
             <div class="tabs">
@@ -69,10 +79,6 @@
         <div class="container">
             <div class="content">
                 <div class="columns">
-                    <div class="column is-4">
-                        <h1 class="subtitle is-6">Jobs</h1>
-                        
-                    </div>
                     <div class="column is-4">
                         <h1 class="subtitle is-6">Property agents</h1>
                         <p><a href="{% url 'login' %}">Login</a></p>

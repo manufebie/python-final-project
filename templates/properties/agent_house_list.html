@@ -3,14 +3,9 @@
 {% block title %}{{ request.user.agent.name }}{% endblock title %}
 
 {% block box %}
-    <div class="box">
-        <h1 class="subtitle">Properties Overview</h1>
-    </div>
-
     {% if not house_list %}
-    <div class="box">
-        <h1 class="subtitle">Message</h1>
-        <p>You have not added any Properties yet. </p>
+    <div class="notification">
+        No units yet
     </div>
     {% endif %}
 

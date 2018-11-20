@@ -20,7 +20,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
-                <a class="navbar-item" href="{% url 'home' %}" style="font-family: 'VT323', monospace; font-size: 34px">  
+                <a class="navbar-item" href="{% url 'account:dashboard' %}" style="font-family: 'VT323', monospace; font-size: 34px">  
                     Dashboard
                 </a>
             </div>
@@ -177,6 +177,35 @@
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Total Properties</p>
+                                    <p class="title">{}</p>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    {% else %}
+                    <div class="box">
+                        <nav class="level">
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Articles</p>
+                                    <p class="title">{{ articles_count }}</p>
+                                </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Apartments</p>
+                                    <p class="title">{{ apartment_count }}</p>
+                                </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Apartment Units</p>
+                                    <p class="title">{}</p>  
+                                </div>
+                            </div>
+                            <div class="level-item has-text-centered">
+                                <div>
+                                    <p class="heading">Houses</p>
                                     <p class="title">{}</p>
                                 </div>
                             </div>

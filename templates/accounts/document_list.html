@@ -21,27 +21,28 @@
             </tr>
         </thead>
         <tbody>
+            {% for object in document_list %}
             <tr>
-                {% for object in document_list %}
-                    <td>{{ object.user.agent.name }}</td>
-                    <td><a href="{{ object.document.url }}">{{ object.name }}</a> </td>
-                    <td>{{ object.timestamp|date:'d M Y' }}</td>
-                    <td>
-                        {% if object.user.agent.verified %}
-                        <span class="icon"><i class="fas fa-check"></i></span>
-                        {% else %}
-                        <span class="icon"><i class="fas fa-times"></i></span>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if object.user.agent.verified %}
-                        No actions required
-                        {% else %}
-                        <a href="{% url 'account:verify_agent' object.user.agent.slug %}">Verify</a>
-                        {% endif %}
-                    </td>
-                {% endfor %}
+                <td>{{ object.user.agent.name }}</td>
+                <td><a href="{{ object.document.url }}">{{ object.name }}</a> </td>
+                <td>{{ object.timestamp|date:'d M Y' }}</td>
+                <td>
+                    {% if object.user.agent.verified %}
+                    <span class="icon"><i class="fas fa-check"></i></span>
+                    {% else %}
+                    <span class="icon"><i class="fas fa-times"></i></span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if object.user.agent.verified %}
+                    No actions required
+                    {% else %}
+                    <a href="{% url 'account:verify_agent' object.user.agent.slug %}">Verify</a>
+                    {% endif %}
+                </td>
+        
             </tr>
+            {% endfor %}
         </tbody>
     </table>
     {% endif%}

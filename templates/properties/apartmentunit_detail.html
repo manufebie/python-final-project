@@ -13,10 +13,19 @@
                 </figure>
             </div>
             <div class="column">
+                <div class="field is-grouped is-grouped-multiline">
+                    <div class="control">
+                        <div class="tags has-addons">
+                            <span class="tag is-dark is-small">Apartment</span>
+                            <span class="tag is-info is-small"><a href="{{ object.apartment.get_absolute_url }}" class="has-text-white">{{ object.apartment }}</a></span>
+                        </div>
+                    </div>
+                </div>
                 <h1 class="title">{{ object.title }}</h1>
                 <small>
                     <span class="icon"><i class="fas fa-calendar-alt"></i></span>
                     <span>{{ object.timestamp|date:'d M Y' }}</span> 
+                    
                 </small>
                 <br><br>
                 <h2 class="subtitle">Description</h2>
