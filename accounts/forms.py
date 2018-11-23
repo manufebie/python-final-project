@@ -20,11 +20,3 @@ class AgentRegistrationForm(UserCreationForm):
         return user
 
 
-class AgentProfileForm(forms.ModelForm):
-
-    class Meta:
-        model = Agent
-        fields = ['name', 'slug', 'is_company', 'is_independent',
-            'about', 'phonenumber', 'line_id']
-
-

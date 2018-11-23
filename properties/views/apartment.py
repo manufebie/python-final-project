@@ -43,6 +43,9 @@ class ApartmentDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         return super(ApartmentDeleteView, self).delete(request, *args, **kwargs)
 
 
+class ApartmentUnitListView(ListView):
+    model = ApartmentUnit
+
 
 class MyApartmentUnitListView(LoginRequiredMixin, ListView):
     model = ApartmentUnit

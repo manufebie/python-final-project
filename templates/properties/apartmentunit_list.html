@@ -4,19 +4,19 @@
 
 {% block content %}
     <div class="box">
-        <h1 class="title">Our houses in Jakarta</h1>
+        <h1 class="title">All our apartment units in Jakarta</h1>
         <p>Lorem ipsum dolor sit amet, vidit laboramus has no, graeci facilis albucius ad mei, cum veritus pertinacia ut. Id quo vide assum evertitur, sumo clita efficiendi vim ea. Verear feugiat ullamcorper sit no. Vix malis deleniti luptatum ut, magna percipit inciderint cu nam. Et sale vitae virtute quo. Sed eu constituto sadipscing, vim dolorem nominavi detraxit ea.
         Ea mel salutandi cotidieque, liber ignota alterum et sed. Eos tritani prodesset id. Vocent lucilius consetetur eu eum, tractatos salutatus gubergren eum eu. Sea ei denique scriptorem, cum et discere partiendo voluptatum. Diam reprimique signiferumque ex qu</p>
     </div>
 
-    {% if not house_list %}
+    {% if not apartmentunit_list %}
     <div class="notification">
-        No houses yet.
+        No units yet.
     </div>
     {% endif %}
 
     <div class="columns is-multiline is-4">
-        {% for object in house_list %}
+        {% for object in apartmentunit_list %}
         <div class="column is-3">
             <div class="card">
                 <div class="card-header">

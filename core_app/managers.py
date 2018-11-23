@@ -2,7 +2,10 @@ from django.contrib.auth.models import BaseUserManager
 
 
 class CustomUserManager(BaseUserManager):
-
+    '''
+    Overriding Django's built-in BaseUserManager
+    to allow email authentication
+    '''
     def create_user(self, email, password=None, **kwargs):
         if not email:
             raise ValueError('Email field is required')

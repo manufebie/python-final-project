@@ -1,17 +1,19 @@
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from core_app.models import CustomUser
-from .forms import AgentRegistrationForm, AgentProfileForm
+from .forms import AgentRegistrationForm
 from .models import Agent, VerificicationDocument
 
 
-class AgentRegistrationView(CreateView):
+class AgentRegistrationView(SuccessMessageMixin, CreateView):
     model = CustomUser
     form_class = AgentRegistrationForm
+    success_message = '%(name)s with %(user.email)s has successfully been registered! Please fill in the profile form.'
     template_name = 'registration/register.html'
 
     def get_context_data(self, **kwargs):
@@ -28,7 +30,8 @@ class AgentRegistrationView(CreateView):
 
 class AgentProfileCreateView(LoginRequiredMixin, CreateView):
     model = Agent
-    form_class = AgentProfileForm
+    fields = ['name', 'slug', 'is_company', 'is_independent',
+            'about', 'phonenumber', 'line_id']
     template_name = 'registration/registration_success.html'
     success_url = reverse_lazy('account:house_list')
 

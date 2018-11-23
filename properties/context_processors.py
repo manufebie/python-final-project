@@ -7,8 +7,11 @@ def apartment_count(request):
     return {'apartment_count': count}
 
 def apartmentunit_count(request):
+    count = ApartmentUnit.objects.count()
+    return {'apartmentunit_count': count}
 
-    count = ApartmentUnit.objects.filter(owner=request.user).count()
+def house_count(request):
+        count = House.objects.count()
+        return {'house_count': count}
     
-    if request.user.is_authenticated():
-        return {'apartmentunit_count': count}
+    

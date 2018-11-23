@@ -70,7 +70,8 @@ TEMPLATES = [
                 # custom context processors
                 'blog.context_processors.articles_count',
                 'properties.context_processors.apartment_count',
-                #'properties.context_processors.apartmentunit_count',
+                'properties.context_processors.apartmentunit_count',
+                'properties.context_processors.house_count',
             ],
         },
     },

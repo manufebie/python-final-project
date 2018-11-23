@@ -46,6 +46,7 @@
         <div class="column is-12 has-text-centered">
             <hr>
             <h1 class="title">Latest blog posts</h1>
+            <p>See<a href="{% url 'blog:article_list' %}"> all</a></p>
         </div>
 
         {% latest_articles as article_list %}
@@ -57,7 +58,7 @@
                     <div class="card-header-title">{{ object.title }}</div>
                 </div>
                 <div class="card-image">
-                    <figure class="image">
+                    <figure class="image is-16by9">
                         <a href="{{ object.get_absolute_url }}">
                             <img src="{{ object.image.url }}" alt="">
                         </a>
@@ -127,6 +128,43 @@
         </div>
         {% endfor %}
         {% endif %}
+        <div class="column is-12 has-text-centered">
+            <h1 class="title">Newest houses</h1>
+        </div>
+    
+        {% house_list as house_list %}
+        {% for house in house_list %}
+        <div class="column is-4">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-header-title">{{ house.title}}</div>
+                </div>
+                <div class="card-image">
+                    <a href="{{ house.get_absolute_url }}">
+                        <figure class="image is-5by3">
+                            <img src="{{ house.image.url }}" alt="{{ house.title }}">
+                        </figure>
+                    </a>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-48x48">
+                                <img src="{{ house.owner.agent.logo.url }}" alt="">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-5">{{ house.owner.agent.name }}</p>
+                            <p class="subtitle is-6">added on {{ house.timestamp|date:'d M Y'}}</p>
+                        </div>
+                    </div>
+                    <div class="content">
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 
 {% endblock content %}

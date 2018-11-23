@@ -27,7 +27,7 @@
             <div class="navbar-menu">
                 <div class="navbar-start">
                     {% if request.user.is_agent %}
-                    <a href="" class="navbar-item">Documents</a>
+                    <a href="" class="navbar-item">Property Agent</a>
                     <a href="{% url 'account:house_list' %}" class="navbar-item">My Houses</a>
                     <a href="{% url 'account:apartmentunit_list' %}" class="navbar-item">My Apartment Units</a>
                     {% else %}
@@ -94,7 +94,6 @@
                                 {% if request.user.is_agent %}
                                     <h1 class="subtitle is-5">{{ request.user.agent.name }}</h1>
                                     <small>
-                                        joined on {{ request.user.date_joined }} <br>
                                         {% if request.user.agent.verified %}
                                         <hr>
                                         Verified
@@ -179,13 +178,13 @@
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Apartment Units</p>
-                                    <p class="title">{}</p>  
+                                    <p class="title">{{ apartmentunit_count }}</p>  
                                 </div>
                             </div>
                             <div class="level-item has-text-centered">
                                 <div>
                                     <p class="heading">Houses</p>
-                                    <p class="title">{}</p>
+                                    <p class="title">{{ house_count }}</p>
                                 </div>
                             </div>
                         </nav>
